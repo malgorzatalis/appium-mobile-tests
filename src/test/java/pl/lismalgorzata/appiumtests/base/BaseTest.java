@@ -9,12 +9,14 @@ public class BaseTest {
     protected AppiumDriver driver;
 
     @BeforeMethod
-    protected void setUp() {
+    public void setUp() {
         driver = DriverFactory.createAndroidDriver();
     }
 
     @AfterMethod
-    protected void tearDown() {
-        if (driver != null) driver.quit();
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
