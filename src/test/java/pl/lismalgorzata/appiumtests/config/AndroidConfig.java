@@ -6,4 +6,6 @@ public class AndroidConfig {
     public String deviceName;
     public String serverUrl;
     public boolean noReset;
+    public String appPackage;
+    public String appWaitActivity;
 }

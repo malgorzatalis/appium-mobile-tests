@@ -23,4 +23,26 @@ public class ConfigLoader {
         }
         return androidConfig;
     }
+
+    private static TestData testData;
+
+    public static TestData testData() {
+        if (testData == null) {
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                InputStream is = ConfigLoader.class
+                        .getClassLoader()
+                        .getResourceAsStream("config/testdata.json");
+
+                if (is == null) {
+                    throw new RuntimeException("config/testdata.json not found");
+                }
+
+                testData = mapper.readValue(is, TestData.class);
+            } catch (Exception e) {
+                throw new RuntimeException("Cannot load testdata.json", e);
+            }
+        }
+        return testData;
+    }
 }

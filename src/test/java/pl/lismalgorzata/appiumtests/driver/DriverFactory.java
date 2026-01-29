@@ -31,7 +31,9 @@ public class DriverFactory {
                 .setAutomationName(config.automationName)
                 .setDeviceName(config.deviceName)
                 .setNoReset(config.noReset)
-                .setApp(appPath);
+                .setApp(appPath)
+                .setAppPackage(config.appPackage)
+                .setAppWaitActivity(config.appWaitActivity);
 
         try {
             AppiumDriver driver = new AndroidDriver(new URL(config.serverUrl), options);

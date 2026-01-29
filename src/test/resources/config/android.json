@@ -2,6 +2,8 @@
   "platformName": "Android",
   "automationName": "UiAutomator2",
   "deviceName": "Samsung",
-  "noReset": true,
-  "serverUrl": "http://127.0.0.1:4723"
+  "noReset": false,
+  "serverUrl": "http://127.0.0.1:4723",
+  "appPackage": "com.swaglabsmobileapp",
+  "appWaitActivity": "com.swaglabsmobileapp.*"
 }
