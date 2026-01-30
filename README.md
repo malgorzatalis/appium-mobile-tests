@@ -17,4 +17,5 @@ The framework is structured to allow future extension to iOS if requried.
 Tests require providing the APK path via a JVM parameter. You can download APK here -> https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk 
 
 ```bash
-mvn test -DappPath=/path/to/app.apk
+mvn test -DappPath=/path/to/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk
+
