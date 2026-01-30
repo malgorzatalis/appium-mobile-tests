@@ -4,9 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.lismalgorzata.appiumtests.base.BaseTest;
 import pl.lismalgorzata.appiumtests.config.ConfigLoader;
-import pl.lismalgorzata.appiumtests.config.DeliveryData;
-import pl.lismalgorzata.appiumtests.config.TestData;
-import pl.lismalgorzata.appiumtests.config.UserCredentials;
+import pl.lismalgorzata.appiumtests.testdata.DeliveryData;
+import pl.lismalgorzata.appiumtests.testdata.TestData;
+import pl.lismalgorzata.appiumtests.testdata.UserCredentials;
 import pl.lismalgorzata.appiumtests.pages.*;
 
 public class E2ECheckoutTest extends BaseTest {
@@ -18,7 +18,7 @@ public class E2ECheckoutTest extends BaseTest {
         DeliveryData checkoutInfo = data.deliveryData;
 
         ProductsPage productsPage = new LoginPage(driver)
-                .login(user.username, user.password);
+                .submitValidLogin(user.username, user.password);
         Assert.assertTrue(productsPage.isDisplayed(), "Products page should be displayed after login");
 
         CartPage cartPage = productsPage

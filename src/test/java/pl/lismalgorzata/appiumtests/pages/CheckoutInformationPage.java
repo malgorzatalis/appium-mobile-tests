@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import pl.lismalgorzata.appiumtests.base.BasePage;
 
 public class CheckoutInformationPage extends BasePage {
+
     private final By checkoutContainer = AppiumBy.accessibilityId("test-Checkout: Your Info");
     private final By firstNameInput = AppiumBy.accessibilityId("test-First Name");
     private final By lastNameInput = AppiumBy.accessibilityId("test-Last Name");

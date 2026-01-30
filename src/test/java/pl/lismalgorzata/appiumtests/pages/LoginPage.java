@@ -10,6 +10,8 @@ public class LoginPage extends BasePage {
     private final By usernameInput = AppiumBy.accessibilityId("test-Username");
     private final By passwordInput = AppiumBy.accessibilityId("test-Password");
     private final By loginButton = AppiumBy.accessibilityId("test-LOGIN");
+    private final By errorMessageContainer = AppiumBy.accessibilityId("test-Error message");
+    private final By errorMessageText = AppiumBy.xpath("//*[@content-desc='test-Error message']//android.widget.TextView");
 
     public LoginPage(AppiumDriver driver) {
         super(driver);
@@ -25,10 +27,25 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public ProductsPage login(String username, String password) {
+    public ProductsPage submitValidLogin(String username, String password) {
         enterUsername(username);
         enterPassword(password);
         tap(loginButton);
         return new ProductsPage(driver);
+    }
+
+    public boolean isErrorDisplayed() {
+        return isVisible(errorMessageContainer);
+    }
+
+    public LoginPage submitInvalidLogin(String username, String password) {
+        enterUsername(username);
+        enterPassword(password);
+        tap(loginButton);
+        return this;
+    }
+
+    public String getErrorMessageText() {
+        return visible(errorMessageText).getText().trim();
     }
 }

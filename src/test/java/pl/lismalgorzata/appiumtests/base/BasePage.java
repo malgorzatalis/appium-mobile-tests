@@ -23,18 +23,31 @@ public abstract class BasePage {
     }
 
     protected void tap(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        WebElement el = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        el.click();
     }
 
     protected void type(By locator, String text) {
-        WebElement el = visible(locator);
-        el.clear();
-        el.sendKeys(text);
+        WebElement element = visible(locator);
+        element.clear();
+        element.sendKeys(text);
     }
 
     protected boolean isVisible(By locator) {
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
+            new WebDriverWait(driver, Duration.ofSeconds(2))
+                    .until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return true;
+        } catch (org.openqa.selenium.TimeoutException e) {
+            return false;
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            return false;
+        }
+    }
+
+    protected boolean isPresent(By locator) {
+        try {
+            return !driver.findElements(locator).isEmpty();
         } catch (Exception e) {
             return false;
         }
@@ -42,13 +55,16 @@ public abstract class BasePage {
 
     protected void scrollToAccessibilityId(String accessibilityId) {
         By locator = AppiumBy.accessibilityId(accessibilityId);
-        if (isVisible(locator)) return;
 
-        driver.findElement(
-                AppiumBy.androidUIAutomator(
-                        "new UiScrollable(new UiSelector().scrollable(true))" +
-                                ".scrollIntoView(new UiSelector().description(\"" + accessibilityId + "\"))"
-                )
-        );
+        if (isPresent(locator) && driver.findElement(locator).isDisplayed()) return;
+
+        driver.findElement(AppiumBy.androidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().description(\"" + accessibilityId + "\"))"
+        ));
+
+        if (!isVisible(locator)) {
+            throw new AssertionError("Element not visible after scroll: " + accessibilityId);
+        }
     }
 }

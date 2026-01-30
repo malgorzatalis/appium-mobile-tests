@@ -1,6 +1,7 @@
 package pl.lismalgorzata.appiumtests.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import pl.lismalgorzata.appiumtests.testdata.TestData;
 
 import java.io.InputStream;
 
@@ -32,7 +33,7 @@ public class ConfigLoader {
                 ObjectMapper mapper = new ObjectMapper();
                 InputStream is = ConfigLoader.class
                         .getClassLoader()
-                        .getResourceAsStream("config/testdata.json");
+                        .getResourceAsStream("testdata/testdata.json");
 
                 if (is == null) {
                     throw new RuntimeException("config/testdata.json not found");
