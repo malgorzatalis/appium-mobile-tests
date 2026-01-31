@@ -26,17 +26,23 @@ public class DriverFactory {
             throw new IllegalStateException("APK not found at appPath: " + apk.toAbsolutePath());
         }
 
+        String platformName = propertiesOrDefault("platformName", config.platformName);
+        String automationName = propertiesOrDefault("automationName", config.automationName);
+        String deviceName = propertiesOrDefault("deviceName", config.deviceName);
+        String serverUrl = propertiesOrDefault("serverUrl", config.serverUrl);
+        boolean noReset = boolProperitesOrDefault("noReset", config.noReset);
+
         UiAutomator2Options options = new UiAutomator2Options()
-                .setPlatformName(config.platformName)
-                .setAutomationName(config.automationName)
-                .setDeviceName(config.deviceName)
-                .setNoReset(config.noReset)
+                .setPlatformName(platformName)
+                .setAutomationName(automationName)
+                .setDeviceName(deviceName)
+                .setNoReset(noReset)
                 .setApp(appPath)
-                .setAppPackage(config.appPackage)
-                .setAppWaitActivity(config.appWaitActivity);
+                .setAppPackage(propertiesOrDefault("appPackage", config.appPackage))
+                .setAppWaitActivity(propertiesOrDefault("appWaitActivity", config.appWaitActivity));
 
         try {
-            AppiumDriver driver = new AndroidDriver(new URL(config.serverUrl), options);
+            AppiumDriver driver = new AndroidDriver(new URL(serverUrl), options);
 
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
             return driver;
@@ -44,5 +50,15 @@ public class DriverFactory {
         } catch (Exception e) {
             throw new RuntimeException("Failed to create Android driver", e);
         }
+    }
+
+    private static String propertiesOrDefault(String key, String defaultValue) {
+        String value = System.getProperty(key);
+        return (value == null || value.isBlank() ? defaultValue : value.trim());
+    }
+
+    private static boolean boolProperitesOrDefault(String key, boolean defaultValue) {
+        String value = System.getProperty(key);
+        return (value == null || value.isBlank()) ? defaultValue : Boolean.parseBoolean(value.trim());
     }
 }

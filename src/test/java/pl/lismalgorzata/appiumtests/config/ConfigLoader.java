@@ -36,7 +36,7 @@ public class ConfigLoader {
                         .getResourceAsStream("testdata/testdata.json");
 
                 if (is == null) {
-                    throw new RuntimeException("config/testdata.json not found");
+                    throw new RuntimeException("testdata/testdata.json not found");
                 }
 
                 testData = mapper.readValue(is, TestData.class);
