@@ -1,7 +1,7 @@
 # Appium Mobile Test
 Automated UI tests for native mobile applications built with Appium and Java.
 This project currently focuses on Android application testing and is intended as a portfolio project for Mobile QA automation. 
-The framework is structured to allow future extension to iOS if requried. 
+The framework is structured to allow future extension to iOS if required. 
 
 ## Tech stack
 -Java 21  
@@ -13,7 +13,7 @@ The framework is structured to allow future extension to iOS if requried.
 -driver (driver creation and configuration)  
 -config (JSON default configuration)  
 -pages (POM)  
--tests (test scearios)  
+-tests (test scenarios)  
 -testdata (JSON external test data)
 
 ## Prerequisites
@@ -31,7 +31,7 @@ Tests require providing the APK path via a JVM parameter. You can download APK h
 mvn test -DappPath=/path/to/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk
 ```
 
-### Optonal overrides  
+### Optional overrides  
 ```bash
 -DserverUrl  
 -DplatformName  
