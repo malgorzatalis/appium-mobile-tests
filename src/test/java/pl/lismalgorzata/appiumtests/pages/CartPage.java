@@ -10,7 +10,6 @@ public class CartPage extends BasePage {
     private final By cartContainer = AppiumBy.accessibilityId("test-Cart Content");
     private final By continueShoppingButton = AppiumBy.accessibilityId("test-CONTINUE SHOPPING");
     private final By checkoutButton = AppiumBy.accessibilityId("test-CHECKOUT");
-    private final By removeButton = AppiumBy.accessibilityId("test-REMOVE");
 
     public CartPage(AppiumDriver driver) {
         super(driver);
@@ -23,5 +22,10 @@ public class CartPage extends BasePage {
     public CheckoutInformationPage goToCheckout() {
         tap(checkoutButton);
         return new CheckoutInformationPage(driver);
+    }
+
+    public ProductsPage backToProductsPage() {
+        tap(continueShoppingButton);
+        return new ProductsPage(driver);
     }
 }

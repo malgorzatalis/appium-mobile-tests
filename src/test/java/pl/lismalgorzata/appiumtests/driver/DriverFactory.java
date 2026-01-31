@@ -30,7 +30,7 @@ public class DriverFactory {
         String automationName = propertiesOrDefault("automationName", config.automationName);
         String deviceName = propertiesOrDefault("deviceName", config.deviceName);
         String serverUrl = propertiesOrDefault("serverUrl", config.serverUrl);
-        boolean noReset = boolProperitesOrDefault("noReset", config.noReset);
+        boolean noReset = boolPropertiesOrDefault("noReset", config.noReset);
 
         UiAutomator2Options options = new UiAutomator2Options()
                 .setPlatformName(platformName)
@@ -57,7 +57,7 @@ public class DriverFactory {
         return (value == null || value.isBlank() ? defaultValue : value.trim());
     }
 
-    private static boolean boolProperitesOrDefault(String key, boolean defaultValue) {
+    private static boolean boolPropertiesOrDefault(String key, boolean defaultValue) {
         String value = System.getProperty(key);
         return (value == null || value.isBlank()) ? defaultValue : Boolean.parseBoolean(value.trim());
     }

@@ -9,7 +9,6 @@ public class ProductsPage extends BasePage {
 
     private final By productsContainer = AppiumBy.accessibilityId("test-PRODUCTS");
     private final By addToCartButton = AppiumBy.accessibilityId("test-ADD TO CART");
-    private final By removeButton = AppiumBy.accessibilityId("test-REMOVE");
     private final By cartButton = AppiumBy.accessibilityId("test-Cart");
 
     public ProductsPage(AppiumDriver driver) {
